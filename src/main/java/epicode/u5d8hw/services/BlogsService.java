@@ -6,7 +6,6 @@ import epicode.u5d8hw.entities.Author;
 import epicode.u5d8hw.entities.Blogpost;
 import epicode.u5d8hw.exceptions.NotFoundException;
 import epicode.u5d8hw.payloads.NewBlogPostDTO;
-import epicode.u5d8hw.payloads.NewBlogPostPayload;
 import epicode.u5d8hw.repositories.BlogsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,16 +49,16 @@ public class BlogsService {
         blogsRepository.delete(found);
     }
 
-    public Blogpost findByIdAndUpdate(int id, NewBlogPostPayload body) {
+    public Blogpost findByIdAndUpdate(int id, NewBlogPostDTO body) {
         Blogpost found = this.findById(id);
 
-        found.setReadingTime(body.getReadingTime());
-        found.setContent(body.getContent());
-        found.setTitle(body.getTitle());
-        found.setCategory(body.getCategory());
+        found.setReadingTime(body.readingTime());
+        found.setContent(body.content());
+        found.setTitle(body.title());
+        found.setCategory(body.category());
 
-        if (found.getAuthor().getId() != body.getAuthorId()) {
-            Author newAuthor = authorsService.findById(body.getAuthorId());
+        if (found.getAuthor().getId() != body.authorId()) {
+            Author newAuthor = authorsService.findById(body.authorId());
             found.setAuthor(newAuthor);
         }
 

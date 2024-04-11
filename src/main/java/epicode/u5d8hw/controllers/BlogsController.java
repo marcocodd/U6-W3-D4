@@ -3,7 +3,6 @@ package epicode.u5d8hw.controllers;
 import epicode.u5d8hw.entities.Blogpost;
 import epicode.u5d8hw.exceptions.BadRequestException;
 import epicode.u5d8hw.payloads.NewBlogPostDTO;
-import epicode.u5d8hw.payloads.NewBlogPostPayload;
 import epicode.u5d8hw.payloads.NewBlogResp;
 import epicode.u5d8hw.services.BlogsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +47,7 @@ public class BlogsController {
 
     // 4. - PUT http://localhost:3001/blogs/{id} (+ req.body)
     @PutMapping("/{blogId}")
-    public Blogpost findAndUpdate(@PathVariable int blogId, @RequestBody NewBlogPostPayload body) {
+    public Blogpost findAndUpdate(@PathVariable int blogId, @RequestBody NewBlogPostDTO body) {
         return blogsService.findByIdAndUpdate(blogId, body);
     }
 
